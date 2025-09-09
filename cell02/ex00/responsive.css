@@ -1,0 +1,25 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    height: 100vh;
+}
+
+td {
+    border: 1px solid black;
+    padding: 10vw;
+    font-size: 5vw;
+    text-align: center;
+}
+
+.first {
+    background-color: #a8c66c;
+}
+
+.second {
+    background-color: #f4b6a6;
+}

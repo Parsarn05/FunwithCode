@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.parallax {
+  position: relative;
+  height: 100vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bg1 {
+  background-image: url("https://wallpapercave.com/wp/wp2884287.jpg");
+}
+
+.bg2 {
+  background-image: url("https://www.daveockop.com/wp-content/uploads/2023/07/anfield.webp");
+}
+
+.text {
+  color: black;
+  font-size: 1em;
+  padding: 20px 40px;
+  border-radius: 10px;
+}
+
+.black-section {
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 100px 20px;
+}
