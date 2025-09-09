@@ -1,50 +1,33 @@
-function saveTodos() {
-  const todos = [];
-  document.querySelectorAll("#ft_list div").forEach(div => {
-    todos.push(div.textContent);
+function getTodos(){
+  const row = document.cookie.split("; ").find(r => r.startsWith("todos="));
+  return row ? JSON.parse(decodeURIComponent(row.split("=")[1])) : [];
+}
+function saveTodos(arr){
+  document.cookie = "todos=" + encodeURIComponent(JSON.stringify(arr)) + "; path=/";
+}
+function render(){
+  const $list = $("#ft_list").empty();
+  const todos = getTodos();
+  todos.forEach((t, i) => {
+    const $item = $("<div>").addClass("todo").text(t);
+    $item.on("click", function(){
+      if (confirm("Remove this task?")) {
+        todos.splice(i,1);
+        saveTodos(todos);
+        render();
+      }
+    });
+    $list.prepend($item);
   });
-  document.cookie = "todos=" + encodeURIComponent(JSON.stringify(todos)) + "; path=/";
 }
 
-function loadTodos() {
-  const match = document.cookie.match(/(^|;) ?todos=([^;]*)(;|$)/);
-  if (match) {
-    try {
-      return JSON.parse(decodeURIComponent(match[2]));
-    } catch (e) {
-      return [];
-    }
+$("#newBtn").on("click", function(){
+  const text = prompt("Enter a new TO DO:");
+  if (text && text.trim() !== ""){
+    const todos = getTodos();
+    todos.push(text.trim());
+    render();
   }
-  return [];
-}
+});
 
-function addTodo(text, save = true) {
-  const list = document.getElementById("ft_list");
-  const div = document.createElement("div");
-  div.textContent = text;
-
-  div.addEventListener("click", () => {
-    if (confirm("Do you really want to remove this TO DO?")) {
-      div.remove();
-      saveTodos();
-    }
-  });
-
-  list.insertBefore(div, list.firstChild);
-
-  if (save) saveTodos();
-}
-
-window.onload = () => {
-  const newBtn = document.getElementById("newBtn");
-
-  const saved = loadTodos();
-  saved.forEach(todo => addTodo(todo, false));
-
-  newBtn.addEventListener("click", () => {
-    const text = prompt("Enter a new TO DO:");
-    if (text && text.trim() !== "") {
-      addTodo(text.trim());
-    }
-  });
-};
+$(render);

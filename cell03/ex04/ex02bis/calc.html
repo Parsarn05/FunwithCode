@@ -2,71 +2,64 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Basic Calculator</title>
+  <title>It's over 9000</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 50px;
-    }
-    input, select, button {
-      margin: 5px;
-      padding: 8px;
-      font-size: 16px;
-    }
+    body{font-family:Arial, sans-serif; margin:24px}
+    .calc{display:flex;gap:8px;align-items:center}
+    input[type="text"]{width:120px;padding:6px}
+    select, input[type="submit"]{padding:6px 10px}
   </style>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
-
 <body>
-  <h2>Basic Calculator</h2>
-  <input type="text" id="left" placeholder="Left number">
-  <select id="operator">
-    <option value="+">+</option>
-    <option value="-">-</option>
-    <option value="*">*</option>
-    <option value="/">/</option>
-    <option value="%">%</option>
-  </select>
-  <input type="text" id="right" placeholder="Right number">
-  <input type="submit" value="Try me!" onclick="calculate()">
+  <h1>It's over 9000</h1>
+
+  <form id="form" class="calc">
+    <input id="left"  type="text" placeholder="left (>=0)">
+    <select id="op">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">*</option>
+      <option value="/">/</option>
+      <option value="%">%</option>
+    </select>
+    <input id="right" type="text" placeholder="right (>=0)">
+    <input type="submit" value="Try me!">
+  </form>
 
   <script>
-    function calculate() {
-      const left = document.getElementById("left").value;
-      const right = document.getElementById("right").value;
-      const operator = document.getElementById("operator").value;
+    setInterval(() => alert('Please, use me...'), 30000);
 
-      const leftNum = Number(left);
-      const rightNum = Number(right);
+    const isNonNegInt = s => /^\d+$/.test(s);
 
-      if (!Number.isInteger(leftNum) || !Number.isInteger(rightNum) || leftNum < 0 || rightNum < 0) {
-        alert("Error :(");
-        console.log("Error :(");
-        return;
+    $("#form").on("submit", function (e) {
+      e.preventDefault();
+
+      const aStr = $("#left").val().trim();
+      const bStr = $("#right").val().trim();
+      const op   = $("#op").val();
+
+      if (!isNonNegInt(aStr) || !isNonNegInt(bStr)) {
+        alert('Error :('); console.log('Error :('); return;
       }
 
-      if ((operator === "/" || operator === "%") && rightNum === 0) {
-        alert("It's over 9000!");
-        console.log("It's over 9000!");
-        return;
+      const a = Number(aStr), b = Number(bStr);
+
+      if ((op === '/' || op === '%') && b === 0) {
+        alert("It's over 9000!"); console.log("It's over 9000!"); return;
       }
 
       let result;
-      switch (operator) {
-        case "+": result = leftNum + rightNum; break;
-        case "-": result = leftNum - rightNum; break;
-        case "*": result = leftNum * rightNum; break;
-        case "/": result = leftNum / rightNum; break;
-        case "%": result = leftNum % rightNum; break;
+      switch(op){
+        case '+': result = a + b; break;
+        case '-': result = a - b; break;
+        case '*': result = a * b; break;
+        case '/': result = a / b; break;
+        case '%': result = a % b; break;
       }
-
-      alert(result);
+      alert(String(result));
       console.log(result);
-    }
-
-    setInterval(() => {
-      alert("Please, use me...");
-    }, 30000);
+    });
   </script>
 </body>
 </html>
