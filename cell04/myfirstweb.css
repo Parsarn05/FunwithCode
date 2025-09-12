@@ -1,0 +1,92 @@
+:root {
+  --bg-img: url('https://images.lifestyleasia.com/wp-content/uploads/sites/7/2024/09/26015909/ishow-speed-1600x900.jpg');
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: "Kanit", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Microsoft Sans Serif", sans-serif;
+  color: #fff;
+  background: #0b1220;
+}
+
+/* Background image with overlay */
+.bg {
+  position: fixed;
+  inset: 0;
+  background-image: linear-gradient(rgba(5,10,20,.65), rgba(5,10,20,.65)), var(--bg-img);
+  background-size: cover;
+  background-position: center;
+  filter: saturate(1.1);
+  z-index: -1;
+}
+
+/* Layout */
+.wrap {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 32px 20px 48px;
+}
+
+.content {
+  width: min(1100px, 100%);
+  display: grid;
+  gap: 28px;
+}
+
+.title {
+  text-align: center;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: .5px;
+  font-size: clamp(40px, 7vw, 92px);
+  text-transform: lowercase;
+  text-shadow: 0 8px 30px rgba(0,0,0,.35);
+}
+
+.links {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+@media (min-width: 700px) {
+  .links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.card {
+  position: relative;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: clamp(20px, 4vw, 36px) clamp(18px, 4vw, 32px);
+  border-radius: 18px;
+  backdrop-filter: blur(6px);
+  background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
+  border: 1px solid rgba(255,255,255,.22);
+  box-shadow: 0 10px 35px rgba(0,0,0,.35);
+  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+  min-height: 140px;
+  isolation: isolate;
+  text-decoration: none;
+  color: #fff;
+}
+.card:hover {
+  /* transform: translateY(-6px) scale(1.02); */
+  box-shadow: 0 16px 55px rgba(0,0,0,.45);
+  border-color: rgba(255,255,255,.35);
+}
+
+.card h2 { margin: 0 0 6px; font-size: clamp(20px, 2.6vw, 28px); font-weight: 700; }
+.card p { margin: 0; opacity: .9; font-weight: 300; }
+
+/* 4 decorative square frames */
+.frames {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+}
+
+/* Footer tip */
+.tip { text-align: center; font-size: 14px; opacity: .85; }
+.tip code { background: rgba(255,255,255,.14); padding: .3em .45em; border-radius: 6px; }

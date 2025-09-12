@@ -1,0 +1,36 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  padding-top: 70px;
+}
+
+.avatar {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.section {
+  padding: 64px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.skill-badge {
+  margin: .2rem;
+}
+.socials img {
+  width: 33px;
+  height: 33px;
+  margin: 0 8px;
+  vertical-align: middle;
+  filter: grayscale(100%);
+  transition: filter 0.2s;
+  
+}
+.socials {
+  
+  padding: 10px 0;
+}
